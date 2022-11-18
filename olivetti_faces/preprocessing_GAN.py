@@ -9,10 +9,10 @@ from baseline import FaceRecognizer
 from preprocessing import *
 attack_targets = torch.tensor([[0],[1],[2],[3],[4],[5],[6],[7],[8],[9]]) # the label of person to generate his image
 faceRecognizer = FaceRecognizer()
-faceRecognizer.load_state_dict(torch.load('best_model.pt'))
+faceRecognizer.load_state_dict(torch.load('model_1e-8_1e-4_1e-2_94.pt'))
 # init generator
 generator = UNet(n_channels=1, n_classes=len(attack_targets))
-generator.load_state_dict(torch.load('best_generator.pt'))
+generator.load_state_dict(torch.load('generator_1e-8.pt'))
 discriminator = Discriminator()
 
 # data from https://www.kaggle.com/code/serkanpeldek/face-recognition-on-olivetti-dataset/notebook
