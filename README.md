@@ -1,6 +1,6 @@
 # Face-Recognition-in-Frequency-Domian
 
-## Datasets
+## Dataset
 * olivetti_faces
 
 ## To Reproduce our Results
