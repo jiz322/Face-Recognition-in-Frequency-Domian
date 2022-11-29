@@ -7,6 +7,7 @@ from unet import UNet
 from discriminator import Discriminator
 from baseline import FaceRecognizer
 from preprocessing import *
+import torch_dct as dct
 attack_targets = torch.tensor([[0],[1],[2],[3],[4],[5],[6],[7],[8],[9]]) # the label of person to generate his image
 faceRecognizer = FaceRecognizer()
 faceRecognizer.load_state_dict(torch.load('model_1e-8_1e-4_1e-2_94.pt'))
@@ -30,10 +31,10 @@ target_discriminator = np.ones(200)
 def generate(target):
     gan_input = torch.normal(0, 1, size=(1,1,64, 64)) # noise
     x = generator.forward(gan_input)
-    return x[0][target]
+    return dct.idct_2d(x[0][target])
 
 def generated_image(target):
-    x = generate(target)
+    x = dct.idct_2d(generate(target))
     tensor_to_picture(x.detach().numpy())
     
 def print_confidence(target):
